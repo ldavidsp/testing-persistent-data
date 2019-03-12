@@ -31,11 +31,11 @@ class MainActivity : AppCompatActivity() {
 
     public override fun onResume() {
         super.onResume()
-        registerReceiver(networkStateReceiver, IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION))
+        //registerReceiver(networkStateReceiver, IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION))
     }
 
     public override fun onPause() {
-        unregisterReceiver(networkStateReceiver)
+       // unregisterReceiver(networkStateReceiver)
         super.onPause()
     }
 
