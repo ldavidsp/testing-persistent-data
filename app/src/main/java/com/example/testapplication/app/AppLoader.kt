@@ -32,8 +32,9 @@ class AppLoader: Application() {
         if (networkInfo != null) {
             if (networkInfo.state == NetworkInfo.State.CONNECTED) {
                 Log.d("MainActivity", "CONNECTED")
-            } else {
-                Log.d("MenuActivity", "DISCONNECTED")
+            }
+            else if (networkInfo.state == NetworkInfo.State.DISCONNECTED){
+                Log.d("MainActivity", "DISCONNECTED")
             }
         }
     }

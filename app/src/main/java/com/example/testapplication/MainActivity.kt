@@ -29,16 +29,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    public override fun onResume() {
-        super.onResume()
-        //registerReceiver(networkStateReceiver, IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION))
-    }
-
-    public override fun onPause() {
-       // unregisterReceiver(networkStateReceiver)
-        super.onPause()
-    }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -52,25 +42,6 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    private val networkStateReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val ni = manager.activeNetworkInfo
-            onNetworkChange(ni)
-        }
-    }
-
-
-    private fun onNetworkChange(networkInfo: NetworkInfo?) {
-        if (networkInfo != null) {
-            if (networkInfo.state == NetworkInfo.State.CONNECTED) {
-                Log.d("MainActivity", "CONNECTED")
-            } else {
-                Log.d("MenuActivity", "DISCONNECTED")
-            }
         }
     }
 }
