@@ -8,34 +8,17 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.util.Log
+import com.example.testapplication.broadcast.ConnectionBroadcastReceiver
 
 class AppLoader: Application() {
+
     override fun onCreate() {
         super.onCreate()
-        registerReceiver(networkStateReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+        registerReceiver(ConnectionBroadcastReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
     }
 
     override fun onTerminate() {
-        unregisterReceiver(networkStateReceiver)
+        unregisterReceiver(ConnectionBroadcastReceiver)
         super.onTerminate()
-    }
-
-    private val networkStateReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val ni = manager.activeNetworkInfo
-            onNetworkChange(ni)
-        }
-    }
-
-    private fun onNetworkChange(networkInfo: NetworkInfo?) {
-        if (networkInfo != null) {
-            if (networkInfo.state == NetworkInfo.State.CONNECTED) {
-                Log.d("MainActivity", "CONNECTED")
-            }
-            else if (networkInfo.state == NetworkInfo.State.DISCONNECTED){
-                Log.d("MainActivity", "DISCONNECTED")
-            }
-        }
     }
 }
