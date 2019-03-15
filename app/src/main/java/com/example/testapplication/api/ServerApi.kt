@@ -3,10 +3,6 @@ package com.example.testapplication.api
 import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
-import android.util.Log
-import com.example.testapplication.app.AppLoader
-import com.example.testapplication.broadcast.ConnectionBroadcastReceiver
 import okhttp3.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,7 +11,7 @@ import java.io.IOException
 
 object ServerApi {
     private lateinit var retrofit: Retrofit
-    private const val baseurl = "http://192.168.43.191" //Sansumg
+    private const val baseurl = "http://192.168.43.191" //Samsung
     //private const val baseurl = "http://192.168.200.27" //hardware
 
     fun health(activity: Activity): Retrofit {
@@ -73,12 +69,11 @@ object ServerApi {
         return networkInfo?.isConnected ?: false
     }
 
-    private fun isRemoteNoCache(cacheControl: String?): Boolean =
-        cacheControl == null ||
+    private fun isRemoteNoCache(cacheControl: String?): Boolean {
+        return cacheControl == null ||
                 cacheControl.contains("no-store", true) ||
                 cacheControl.contains("no-cache", true) ||
                 cacheControl.contains("must-revalidate", true) ||
                 cacheControl.contains("max-age=0", true)
-
-
+    }
 }
