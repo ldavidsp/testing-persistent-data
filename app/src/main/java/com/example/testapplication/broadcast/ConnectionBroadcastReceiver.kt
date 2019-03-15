@@ -8,7 +8,7 @@ import android.net.NetworkInfo
 import android.util.Log
 
 object ConnectionBroadcastReceiver: BroadcastReceiver() {
-    var networkState = false
+    internal var networkState: Boolean = false
 
     override fun onReceive(context: Context?, intent: Intent?) {
         val manager = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
