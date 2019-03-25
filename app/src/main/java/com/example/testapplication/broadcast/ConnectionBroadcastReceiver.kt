@@ -8,7 +8,7 @@ import android.net.NetworkInfo
 import android.util.Log
 
 object ConnectionBroadcastReceiver: BroadcastReceiver() {
-    internal var networkState: Boolean = false
+    private var networkState: Boolean = false
 
     override fun onReceive(context: Context?, intent: Intent?) {
         val manager = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -17,15 +17,15 @@ object ConnectionBroadcastReceiver: BroadcastReceiver() {
     }
 
     private fun onNetworkChange(networkInfo: NetworkInfo?) {
-        if (networkInfo != null) {
-            if (networkInfo.isConnected) {
-                networkState = true
-                Log.d("MainActivity", "CONNECTED")
-            }
+        if (networkInfo != null && networkInfo.isConnected) {
+            networkState = true
+            Log.d("MainActivity", "CONNECTED")
         } else {
             networkState = false
             Log.d("MainActivity", "DISCONNECTED")
         }
     }
+
+
 }
 

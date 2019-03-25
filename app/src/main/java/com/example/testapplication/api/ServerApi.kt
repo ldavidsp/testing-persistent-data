@@ -11,8 +11,9 @@ import java.io.IOException
 
 object ServerApi {
     private lateinit var retrofit: Retrofit
-    private const val baseurl = "http://192.168.43.191" //Samsung
+    //private const val baseurl = "http://192.168.43.191" //Samsung
     //private const val baseurl = "http://192.168.200.27" //hardware
+    private const val baseurl = "https://jsonplaceholder.typicode.com" //JSON TEST
 
     fun health(activity: Activity): Retrofit {
         val cacheSize = (10 * 1024 * 1024).toLong()
@@ -58,7 +59,8 @@ object ServerApi {
         retrofit = Retrofit.Builder()
             .baseUrl(baseurl)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(client).build()
+            .client(client)
+            .build()
 
         return retrofit
     }
